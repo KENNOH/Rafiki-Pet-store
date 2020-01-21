@@ -1,0 +1,51 @@
+{% extends 'home/home.html' %}
+{% block content %}
+<div class="container">
+	<div class="featured-post-wrapper">
+		<div class="featured-post-text-wrapper">
+			<div class="row">
+				<div class="col">
+					<div class="login-panel panel panel-default">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<center>
+									<h5 class="m-0 font-weight-bold text-dark">Registration Successful</h5>
+								</center>
+								<div style="float: right;">
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<p class="bs-component">
+											<table class="radii">
+												<tbody>
+													<div class="login-panel panel panel-default">
+														<div class="panel-body">
+															<p>
+																<center>
+<strong>
+	<h4>You have registered successfully!!</h4>
+</strong>
+																</center>
+																
+															</p>
+															<script>setTimeout(function () { window.location.href = "/accounts/login/" }, 10000);</script>
+														</div>
+													</div>
+												</tbody>
+											</table>
+										</p>
+									</table>
+								</div>
+							</div>
+							<div class="card-footer small text-muted">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

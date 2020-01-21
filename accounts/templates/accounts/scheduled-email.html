@@ -1,0 +1,20 @@
+{% autoescape off %}
+Hello {{ user.username }},this is your weekly updates from the website.The current timestamp from the server is {{ date }}.
+If you are seeing this email,assume that the site is up and running flawlessly.
+The current weekly earnings of Freelance Manager accrue at kshs {{ data }}.
+The total number of users registered stands at {{ no }} and the total number of active users stands at {{ act }}.
+
+The current disk usage reports stands at:
+	{{ Total }},
+	{{ used }},
+	{{ free }}.
+The current CPU and memory usage reports stands at:
+	CPU in use: {{ cpu }}%,
+	Memory in use: {{ memory }}%.
+You can login to your panel via this link.
+http://www.freelancemanager.co.ke/chief83
+
+Note that this is an automated email to the admin from the server.
+Please find the attached error logs for the servers.
+Have a good day.
+{% endautoescape %}

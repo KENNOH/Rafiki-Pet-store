@@ -1,0 +1,128 @@
+{% extends "dashboard/dashboard.html" %}
+{% block content %}
+<style type="text/css">
+  .radii {
+    border-radius: 5px;
+  }
+  
+</style>
+<div class="container">
+  <div class="featured-post-wrapper">
+    <div class="featured-post-text-wrapper">
+      <div class="row" style="margin-top:30px;">
+        <div class="col-md-2 col-md-offset-2"></div>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="login-panel panel panel-default">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <center>
+                  <h6 class="m-0 font-weight-bold text-primary">Fill in your details here</h6>
+                </center>
+                <div style="float: right;">
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    {% if form.errors %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <form method="POST" class="form-horizontal" action="/dashboard/start/" enctype="multipart/form-data">{% csrf_token %}
+                      <p class="bs-component"></p>
+                      <div style="float: right;">
+                        <p class="text-danger">Fields marked by red * are required</p>
+                      </div><br><br>
+
+                      <div class="form-group">
+                        <strong><label for="inputEmail">Enter the pet type</label>
+                          <span class="text-danger"> * </span>
+                        </strong>
+                        {{form.Type}}{{form.Type.errors}}
+                      </div><br>
+
+                      <div class="form-group">
+                        <strong><label for="inputEmail">Enter the number of pets:</label>
+                          <span class="text-danger"> * </span>
+                        </strong>
+                        {{form.quantity}}{{form.quantity.errors}}
+                      </div><br>
+
+                      <div class="form-group">
+                        <strong><label for="inputEmail">Enter the cost per pet:</label>
+                          <span class="text-danger"> * </span>
+                        </strong>
+                        {{form.cost}}{{form.cost.errors}}
+                      </div><br>
+
+                      <div class="form-group">
+                        <strong><label for="inputEmail">Enter your location:</label>
+                          <span class="text-danger"> * </span>
+                        </strong>
+                        {{form.location}}{{form.location.errors}}
+                      </div><br>
+
+                       <div class="form-group">
+                        <strong><label for="inputEmail">Enter Contact Email</label>
+                          <span class="text-danger"> * </span>
+                        </strong>
+                        {{form.contact_email}}{{form.contact_email.errors}}
+                      </div><br>
+
+                       <div class="form-group">
+                        <strong><label for="inputEmail">Enter the Contact Phone</label>
+                          <span class="text-danger"> * </span>
+                        </strong>
+                        {{form.contact_phone}}{{form.contact_phone.errors}}
+                      </div><br>
+
+
+                      <div class="form-group">
+                        <div class="file-field">
+                          <strong>
+                            <label for="inputEmail">Upload your attachments here:</label>
+                          </strong><br>
+                          <div class="btn btn-primary btn-sm">
+                            <span>Upload files</span>
+                            {{form.attachment}}
+                          </div><br>
+                          <sub><span class="label label-info">Use Control + select to multiselect files.</span></sub>
+                          <sub><span class="label label-warning">Uploads exceeding 10.5mb are not accepted</span></sub>
+                        </div>
+                      </div>
+
+                      
+                      <div class="form-group">
+                        <strong>
+                          <label for="inputEmail">Any message?</label>
+                        </strong>
+                        {{form.description}}
+                      </div>
+
+                      </p>
+                      <p class="bs-component">
+                        <center>
+                            <input class="btn btn-success btn-sm btn-block" type="Submit" value="Send Now!" />
+        
+                        </center>
+                      </p>
+                      <input type="hidden" name="next" value="{{ next }}" />
+
+                    </form>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer small text-muted"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-md-offset-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
