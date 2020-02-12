@@ -1,44 +1,59 @@
- {% extends 'home/pets_home.html' %}
-{% load static %}
-{% block content %}
-  <section id="about">
-      <div class="container">
+ {% extends 'home/pets_home.html' %} {% load static %} {% block content %}
+<section id="about">
+    <div class="container">
 
         <header class="section-header">
-        <br>
-          <h3>Pet Type: {{pet.Type}}</h3>
+            <br>
+            <h3>Pet Type: {{pet.Type}}</h3>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <ol class="breadcrumb">
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><strong>{{ message }} {{form.errors}}</strong></li>
+                </ol>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </header>
         <div class="row about-container">
-          <div class="col content order-lg-1 order-2">
-            <p>
-             <p><b> Contact Email: {{pet.contact_email}}</b></p>
-              <p><b>Contact Phone: {{pet.contact_phone}}</b></p>
-             <p><b> Location: {{pet.location}}</b></p>
-              <p><b> Quantity: {{pet.quantity}}</b></p>
-                <p><b> Cost per pet: {{pet.cost}}</b></p>
-                 <p><b> Location: {{pet.location}}</b></p>
-              <p><b>Description: {{pet.description}}</b></p>
-                 <p><b> Posted on: {{pet.created_at}}</b></p>
-            </p>
+            <div class="col content order-lg-1 order-2">
+                <p>
+                    <p><b> Contact Email: {{pet.contact_email}}</b></p>
+                    <p><b>Contact Phone: {{pet.contact_phone}}</b></p>
+                    <p><b> Location: {{pet.location}}</b></p>
+                    <p><b> Quantity: {{pet.quantity}}</b></p>
+                    <p><b> Cost per pet: {{pet.cost}}</b></p>
+                    <p><b> Location: {{pet.location}}</b></p>
+                    <p><b>Description: {{pet.description}}</b></p>
+                    <p><b> Posted on: {{pet.created_at}}</b></p>
+                </p>
 
-            <section id="portfolio" class="clearfix">
-        <div class="row">
-          <div class="col-lg-12">
-            <ul id="portfolio-flters">
-           <a href="#">   <li data-filter="*" class="filter-active">Contact seller</li></a>
-           <a href="/pets_display/">   <li data-filter="*" class="filter-active">Go Back</li></a>
-            </ul>
-          </div>
-        </div>
-    </section>
-          </div>
+                <section id="portfolio" class="clearfix">
+                    <div class="row">
+                        <div class="col-lg-12">
 
-          <div class="col background order-lg-2 order-1 wow fadeInUp">
-          {% for i in image %}
-            <img src="{{i.attachment.url}}" class="img-fluid" alt="">
-            {% endfor %}
-          </div>
+                            <ul id="portfolio-flters">
+                                <a href="{% url 'make_review' urlhash=pet.urlhash %}">
+                                    <li data-filter="*" class="filter-active">Leave Review</li>
+                                </a>
+                                <a href="{% url 'make_review' urlhash=pet.urlhash %}">
+                                    <li data-filter="*" class="filter-active">See reviews</li>
+                                </a>
+                                <a href="/pets_display/">
+                                    <li data-filter="*" class="filter-active">Go Back</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+            <div class="col background order-lg-2 order-1 wow fadeInUp">
+                {% for i in image %}
+                <img src="{{i.attachment.url}}" class="img-fluid" alt=""> {% endfor %}
+            </div>
         </div>
-      </div>
-    </section>
-    {% endblock %}
+    </div>
+</section>
+{% endblock %}

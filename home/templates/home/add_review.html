@@ -1,0 +1,52 @@
+ {% extends 'home/pets_home.html' %}{% block content %}
+<style type="text/css">
+    .radii {
+        border-radius: 5px;
+    }
+</style>
+<div class="container">
+    <div class="featured-post-wrapper">
+        <div class="featured-post-text-wrapper">
+            <div class="row" style="margin-top:100px;">
+                <div class="col-md-2 col-md-offset-2"></div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="login-panel panel panel-default">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <center>
+                                    <h6 class="m-0 font-weight-bold text-primary">Fill this form to leave a review for {{name}}</h6>
+                                </center>
+                                <div style="float: right;">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        {% if form.errors %} {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                        {% endfor %} {% endif %}
+                                        <form method="POST" class="form-horizontal">{% csrf_token %} {{form.as_p}}
+                                            <p class="bs-component">
+                                                <center>
+                                                    <input class="btn btn-primary btn-sm btn-block" type="Submit" value="Submit Review" />
+
+                                                </center>
+                                            </p>
+                                            <input type="hidden" name="next" value="{{ next }}" />
+                                        </form>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer small text-muted"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

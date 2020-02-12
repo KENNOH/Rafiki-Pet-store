@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from dashboard.models import Pet_type, Pet_services, Images, Transaction, C2BMessage, OnlineCheckoutResponse
+from home.models import Review
 
 
 class PetForm(forms.ModelForm):
@@ -26,6 +27,30 @@ class PetForm(forms.ModelForm):
 
     def save(self, commit=True):
         Document = super(PetForm, self).save(commit=False)
+        if commit:
+            Document.save()
+        return Document
+
+
+class ReviewForm(forms.ModelForm):
+    OPTIONS = (
+        (1, 1),
+        (2, 2),
+        (3, 3),
+      	(4, 4),
+        (5, 5),
+    )
+    comment = forms.CharField(label="Make a comment:", required=False, max_length=200, widget=forms.Textarea(attrs={'class': 'form-control form-textbox', 'name': 'comment', 'rows': '3'}))
+    rating = forms.ChoiceField(label="Select rating for this customer:", required=True, choices=OPTIONS,widget=forms.Select(attrs={'class': 'form-control form-textbox', 'name': 'rating'}))
+    class Meta:
+        model = Review
+        fields = ('rating', 'comment')
+
+    def clean(self, *args, **kwargs):
+        return super(ReviewForm, self).clean(*args, **kwargs)
+
+    def save(self, commit=True):
+        Document = super(ReviewForm, self).save(commit=False)
         if commit:
             Document.save()
         return Document
