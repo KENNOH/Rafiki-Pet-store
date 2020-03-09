@@ -22,10 +22,18 @@ def site(request):
 			password = form.cleaned_data.get("password")
 			user = authenticate(username=username,password=password)
 			login(request, user)
+			if user.groups.filter(name='Pet Owner').exists():
+				try:
+					return redirect(request.GET.get('next'))
+				except:
+					return HttpResponseRedirect('/dashboard/')
+			if user.groups.filter(name='Customer').exists():
+				try:
+					return redirect(request.GET.get('next'))
+				except:
+					return HttpResponseRedirect('/')
 			if user.is_staff==True:
 				return HttpResponseRedirect('/admin/')
-			else:
-				return HttpResponseRedirect('/dashboard/')
 		else:
 			return render(request, 'accounts/login.html',{"form":form})
 	else:

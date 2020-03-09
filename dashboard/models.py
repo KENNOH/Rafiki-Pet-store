@@ -9,6 +9,10 @@ class Pet_type(models.Model):
         return self.name
 
 class Pet_services(models.Model):
+    MAYBECHOICE = (
+        ('Pet', 'Pet'),
+        ('Service', 'Service'),
+    )
     Type = models.CharField(max_length=255, blank=True, null=True)
     contact_phone = models.CharField(max_length=255, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -20,12 +24,16 @@ class Pet_services(models.Model):
     quantity = models.IntegerField(blank=True, null=True)
     cost = models.FloatField(default=0.0)
     status = models.NullBooleanField(max_length=5, default=0, verbose_name="Payment Processed status")
+    genre = models.CharField(max_length=255, choices=MAYBECHOICE, default="Pet")
+    mpesa_receipt_code = models.CharField(max_length=255, blank=True, null=True)
+    thumbnail = models.FileField(upload_to='dashboard', blank=True, null=True)
     
     def __unicode__(self):
         return self.urlhash
     
     class Meta:
-        verbose_name_plural = 'Products'
+        verbose_name_plural = 'Pets'
+
 
 class Images(models.Model):
     urlhash = models.CharField(max_length=6, blank=True, null=True)
@@ -38,10 +46,13 @@ class Images(models.Model):
 
 
 class Transaction(models.Model):
-	amount = models.FloatField(max_length=30, default=0.0, verbose_name="Amount transacted")
-	last_updated = models.DateTimeField(auto_now_add=True)
-	user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Username")
-	status = models.NullBooleanField(max_length=5, default=1)
+    mpesa_receipt_number = models.CharField(max_length=255, blank=True, null=True)
+    amount = models.FloatField(max_length=30, default=0.0, verbose_name="Amount paid")
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    last_updated = models.DateTimeField(auto_now_add=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Transacted By")
+    status = models.NullBooleanField(max_length=5, default=1)
+
 
 
 class C2BMessage(models.Model):

@@ -1,218 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Rafiki Pet Store</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+    <meta charset="utf-8">
+    <title>Rafiki Pet Store</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-  <!-- Favicons -->
-  {% load static %}
-  <link href="{% static 'img/pets_favicon.png' %}" rel="icon">
-  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <!-- Favicons -->
+    {% load static %}
+    <link href="{% static 'img/pets_favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
 
-  <!-- Bootstrap CSS File -->
-  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-  <!-- Libraries CSS Files -->
-  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
 
-  <!-- Main Stylesheet File -->
-  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <header id="header" class="fixed-top">
-    <div class="container">
+    <header id="header" class="fixed-top">
+        <div class="container">
 
-      <div class="logo float-left">
-         <h1 class="text-light"><a href="/"><span>Rafiki Pet Store</span></a></h1> 
-      </div>
+            <div class="logo float-left">
+                <h1 class="text-light"><a href="/"><span>Rafiki Pet Store</span></a></h1>
+            </div>
 
-      <nav class="main-nav float-right d-none d-lg-block">
-        <ul>
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="/pets_display/">View pets</a></li>
-          <li><a href="#team">Seek pet services</a></li>
-          <li><a href="/accounts/login/">Sign in</a></li>
-        </ul>
-      </nav><!-- .main-nav -->
-      
-    </div>
-  </header>
-  <section id="intro" class="clearfix">
-    <div class="container">
-      {% block content %}
-      <div class="intro-img">
-        <img src="{% static 'img/pets.jpg' %}" alt="" class="img-fluid">
-      </div>
-      <div class="intro-info">
-        <h2>Your no. 1 solution for your pets needs!</h2>
-        <div>
-          <a href="/register/" class="btn-get-started scrollto">Get Started</a>
-          <a href="#services" class="btn-services scrollto">Our Services</a>
+            <nav class="main-nav float-right d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="/pets_display/">View pets</a></li>
+                    <li><a href="/services_display/">Seek pet services</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/logout/">Sign out</a></li>
+                    {% else%}
+                    <li><a href="/accounts/login/">Sign in</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <!-- .main-nav -->
+
         </div>
-      </div>
-{%  endblock %}
-    </div>
-  </section><!-- #intro -->
-  <main id="main">
+    </header>
+    <section id="intro" class="clearfix">
+        <div class="container">
+            {% block content %}
+            <div class="intro-img">
+                <img src="{% static 'img/pets.jpg' %}" alt="" class="img-fluid">
+            </div>
+            <div class="intro-info">
+                <h2>Your no. 1 solution for your pets needs!</h2>
+                <div>
+                    <a href="/register/" class="btn-get-started scrollto">Get Started</a>
+                    <a href="#services" class="btn-services scrollto">Our Services</a>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </section>
+    <!-- #intro -->
+    <main id="main">
 
-    <!--==========================
+        <!--==========================
       About Us Section
     ============================-->
-    <section id="about">
-      <div class="container">
+        <section id="about">
+            <div class="container">
 
-        <header class="section-header">
-          <h3>About Us</h3>
-          <p>We are a pet dealing enterprise.</p>
-        </header>
+                <header class="section-header">
+                    <h3>About Us</h3>
+                    <p>We are a pet dealing enterprise.</p>
+                </header>
 
-        <div class="row about-container">
+                <div class="row about-container">
 
-          <div class="col-lg-6 content order-lg-1 order-2">
-            <p>
-              Rafiki Online Pet Store aims to Link sellers who rear and keep Cats and dogs with pet Buyers around the city. These sellers will not only be visible online to Pet lovers but their full profiles, reviews from previous buyers, extra services they can provide such as Pet boarding or supply of pet foods and even healthcare services.
-            </p>
+                    <div class="col-lg-6 content order-lg-1 order-2">
+                        <p>
+                            Rafiki Online Pet Store aims to Link sellers who rear and keep Cats and dogs with pet Buyers around the city. These sellers will not only be visible online to Pet lovers but their full profiles, reviews from previous buyers, extra services they can provide
+                            such as Pet boarding or supply of pet foods and even healthcare services.
+                        </p>
 
-            <div class="icon-box wow fadeInUp">
-              <div class="icon"><i class="fa fa-shopping-bag"></i></div>
-              <h4 class="title"><a href="">A one off Pet Platform</a></h4>
-              <p class="description"> Pets are not just animals; they provide home owners emotional and physical benefits. Like a child, a pet will depend on you for almost everything from food, shelter, nourishment, medical attention and safety. Just like people, pets thrive on affection, the more you give the more you’ll definitely get back.</p>
+                        <div class="icon-box wow fadeInUp">
+                            <div class="icon"><i class="fa fa-shopping-bag"></i></div>
+                            <h4 class="title"><a href="">A one off Pet Platform</a></h4>
+                            <p class="description"> Pets are not just animals; they provide home owners emotional and physical benefits. Like a child, a pet will depend on you for almost everything from food, shelter, nourishment, medical attention and safety. Just like people,
+                                pets thrive on affection, the more you give the more you’ll definitely get back.</p>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-lg-6 background order-lg-2 order-1 wow fadeInUp">
+                        <img src="{% static 'img/pets_big.png' %}" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+
+
+
             </div>
-
-            
-
-          </div>
-
-          <div class="col-lg-6 background order-lg-2 order-1 wow fadeInUp">
-            <img src="{% static 'img/pets_big.png' %}" class="img-fluid" alt="">
-          </div>
-        </div>
-
-       
-
-
-      </div>
-    </section><!-- #about -->
+        </section>
+        <!-- #about -->
 
 
 
-  
-    <!--==========================
+
+        <!--==========================
       Services Section
     ============================-->
-    <section id="services" class="section-bg">
-      <div class="container">
+        <section id="services" class="section-bg">
+            <div class="container">
 
-        <header class="section-header">
-          <h3>Services</h3>
-          <p>Rafiki Pet store provides the following services.</p>
-        </header>
+                <header class="section-header">
+                    <h3>Services</h3>
+                    <p>Rafiki Pet store provides the following services.</p>
+                </header>
 
-        <div class="row">
+                <div class="row">
 
-          <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-duration="1.4s">
-            <div class="box">
-              <h4 class="title"><a href="">Pet acquisition</a></h4>
-              <p class="description">We help you acquire pets as per your whims and tastes.</p>
+                    <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-duration="1.4s">
+                        <div class="box">
+                            <h4 class="title"><a href="">Pet acquisition</a></h4>
+                            <p class="description">We help you acquire pets as per your whims and tastes.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-duration="1.4s">
+                        <div class="box">
+                            <h4 class="title"><a href="">Pet selling</a></h4>
+                            <p class="description">We help you sell pets to potential buyers.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                        <div class="box">
+                            <h4 class="title"><a href="">Health Services for your pet</a></h4>
+                            <p class="description">We help you connect with pet doctors around your neibourhood for your pet </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                        <div class="box">
+                            <h4 class="title"><a href=""> Pets Adoption</a></h4>
+                            <p class="description">We help you choose the right pet </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
+                        <div class="box">
+                            <h4 class="title"><a href="">Pet food</a></h4>
+                            <p class="description">We sell and provide pet food</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
+                        <div class="box">
+                            <h4 class="title"><a href="">Consultancy Services</a></h4>
+                            <p class="description">We provide you with a answers to your question about pets.</p>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-          </div>
-          <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-duration="1.4s">
-            <div class="box">
-              <h4 class="title"><a href="">Pet selling</a></h4>
-              <p class="description">We help you sell pets to potential buyers.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-            <div class="box">
-              <h4 class="title"><a href="">Health Services for your pet</a></h4>
-              <p class="description">We help you connect with pet doctors around your neibourhood for your pet </p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-            <div class="box">
-              <h4 class="title"><a href=""> Pets Adoption</a></h4>
-              <p class="description">We help you choose the right pet </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
-            <div class="box">
-              <h4 class="title"><a href="">Pet food</a></h4>
-              <p class="description">We sell and provide pet food</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
-            <div class="box">
-              <h4 class="title"><a href="">Consultancy Services</a></h4>
-              <p class="description">We provide you with a answers to your question about pets.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- #services -->
+        </section>
+        <!-- #services -->
 
 
-    
 
-  </main>
 
-  <!--==========================
+    </main>
+
+    <!--==========================
     Footer
   ============================-->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
 
-         
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong>Rafiki Pet store</strong>. All Rights Reserved
+            </div>
 
         </div>
-      </div>
-    </div>
+    </footer>
+    <!-- #footer -->
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong>Rafiki Pet store</strong>. All Rights Reserved
-      </div>
-      
-    </div>
-  </footer><!-- #footer -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Uncomment below i you want to use a preloader -->
+    <!-- <div id="preloader"></div> -->
 
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-  <!-- Uncomment below i you want to use a preloader -->
-  <!-- <div id="preloader"></div> -->
-
-  <!-- JavaScript Libraries -->
-  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
-  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-  <script src="{% static 'lib/mobile-nav/mobile-nav.js' %}"></script>
-  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
-  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
+    <!-- JavaScript Libraries -->
+    <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/mobile-nav/mobile-nav.js' %}"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
 </body>
+
 </html>

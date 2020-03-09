@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from dashboard.models import Pet_type, Pet_services, Images, Transaction, C2BMessage, OnlineCheckoutResponse
 from dashboard.forms import ReviewForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from .models import Review
 from django.contrib import messages
 # Create your views here.
@@ -10,23 +11,32 @@ def site(request):
 
 
 def pets_display(request):
-	pets = Pet_services.objects.all()
+	pets = Pet_services.objects.all().filter(genre="Pet", status=1)
 	t = Pet_type.objects.all()
 	img = Images.objects.all()
 	return render(request, 'home/pets_display.html',{'pets':pets,'t':t,'img':img})
 
+
+def services_display(request):
+	pets = Pet_services.objects.all().filter(genre="Service", status=1)
+	img = Images.objects.all()
+	return render(request, 'home/service.html', {'pets': pets, 'img': img})
+
 def pets_expand(request,urlhash):
 	pet = Pet_services.objects.get(urlhash=urlhash)
 	image = Images.objects.filter(urlhash=pet.urlhash)
-	return render(request, 'home/pets_expand.html', {'pet': pet,'image':image})
+	reviews = Review.objects.filter(pet_instance=pet)
+	return render(request, 'home/pets_expand.html', {'pet': pet,'image':image,'reviews':reviews})
+
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='Customer').exists())
 def make_review(request, urlhash):
 	pet = Pet_services.objects.get(urlhash=urlhash)
 	if request.method == 'POST':
 		form = ReviewForm(request.POST)
 		if form.is_valid():
-			if not Review.objects.filter(customer=request.user, pet_instance=pet).exists():
+			if not Review.objects.filter(pet_instance=pet, customer=request.user).exists():
 				h = form.save(commit=False)
 				h.customer = request.user
 				h.pet_instance = pet
@@ -46,6 +56,11 @@ def make_review(request, urlhash):
 
 def sort(request,name):
 	t = Pet_type.objects.all()
-	tpe = t.get(name__icontains=name).name
-	pets = Pet_services.objects.all().filter(Type=tpe)
-	return render(request, 'home/pets_display.html', {'pets': pets, 't': t})
+	try:
+		tpe = t.get(name__icontains=name).name
+		pets = Pet_services.objects.all().filter(Type=tpe).filter(genre="Pet", status=1)
+		return render(request, 'home/pets_display.html', {'pets': pets, 't': t})
+	except:
+		pets = Pet_services.objects.all().filter(Type__icontains=name).filter(genre="Service", status=1)
+		return render(request, 'home/service.html', {'pets': pets})
+

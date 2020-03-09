@@ -1,0 +1,35 @@
+{% load static %}
+<center>
+    <img src="http://127.0.0.1:8000/static/img/pets.jpg" width="250" height="120" />
+    <strong>  <h2>Rafiki Pet Store</h2>
+    <h3>Payment Transaction Reports</h3></strong>
+</center>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Mpesa Receipt Number</th>
+                    <th>Amount</th>
+                    <th>Phone</th>
+                    <th>User</th>
+                    <th>Added on</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in transactions %}
+                <tr>
+                    <td></td>
+                    <td>{{ i.mpesa_receipt_number}}</td>
+                    <td>{{ i.amount }}</td>
+                    <td>{{ i.phone }}</td>
+                    <td>{{ i.user_id }}</td>
+                    <td>{{i.last_updated}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

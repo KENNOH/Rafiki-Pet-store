@@ -18,10 +18,11 @@ class PetsTable(tables.Table):
 
 	class Meta:
 		model = Pet_services
-		fields = ('urlhash','Type','location','quantity','cost','contact_phone','contact_email','cost','status')
+		fields = ('urlhash','Type','location','cost','contact_phone','contact_email','cost','status')
 
 
 class TransactionTable(tables.Table):
     class Meta:
         model = Transaction
-        fields = ('user_id','amount','status','last_updated')
+        fields = ('mpesa_receipt_number', 'amount',
+                  'phone', 'user_id', 'last_updated','status')

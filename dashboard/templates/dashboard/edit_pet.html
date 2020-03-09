@@ -1,0 +1,84 @@
+{% extends 'dashboard/dashboard.html' %} {% load static %} {% block content %}
+<div class="container">
+    <div class="featured-post-wrapper">
+        <div class="featured-post-text-wrapper">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2"></div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="login-panel panel panel-default">
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <center>
+                                    <h6 class="m-0 font-weight-bold text-primary">Edit Pets Form</h6>
+                                </center>
+                                <div style="float: right;">
+                                </div>
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <ol class="breadcrumb">
+                                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><strong>{{ message }} {{form.errors}}</strong></li>
+                                    </ol>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <form method="POST" class="form-horizontal" enctype="multipart/form-data" data-toggle="modal" data-target="#revModal">{% csrf_token %}
+                                            <p class="bs-component">
+                                                <table class="radii">
+                                                    <tbody>
+                                                        {{form.as_p}}
+                                                    </tbody>
+                                                </table>
+                                            </p>
+                                            <p class="bs-component">
+                                                <center>
+                                                    <a href="#" data-toggle="modal" data-target="#revModal">
+                                                        <input class="btn btn-success btn-sm btn-block" type="Submit" value="Submit" />
+                                                    </a>
+                                                </center>
+                                            </p>
+                                            <input type="hidden" name="next" value="{{ next }}" />
+
+                                            <div class="modal fade" id="revModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to continue with this action?
+                                                            </h5>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">X</span>
+                              </button>
+                                                        </div>
+                                                        <div class="modal-body">Select "Proceed" to commit these changes.</div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                            <button class="btn btn-warning" type="submit" value="submit">Proceed</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer small text-muted"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -27,19 +27,17 @@
                                             <strong>{{ error|escape }}</strong>
                                         </div>
                                         {% endfor %} {% endif %}
-                                        <form method="POST" class="form-horizontal" action="/dashboard/start/" enctype="multipart/form-data">{% csrf_token %}
+                                        <form method="POST" class="form-horizontal" action="/dashboard/add_service/" enctype="multipart/form-data">{% csrf_token %}
                                             <p class="bs-component"></p>
                                             <div style="float: right;">
                                                 <p class="text-danger">Fields marked by red * are required</p>
                                             </div><br><br>
 
                                             <div class="form-group">
-                                                <strong><label for="inputEmail">Select the pet subcategory</label>
+                                                <strong><label for="inputEmail">Select the service subcategory</label>
                           <span class="text-danger"> * </span>
                         </strong> {{form.Type}}{{form.Type.errors}}
                                             </div><br>
-
-
 
                                             <div class="form-group">
                                                 <div class="file-field">
@@ -66,11 +64,15 @@
                                                 </div>
                                             </div>
 
+
+
                                             <div class="form-group">
                                                 <strong><label for="inputEmail">Enter your location:</label>
                           <span class="text-danger"> * </span>
                         </strong> {{form.location}}{{form.location.errors}}
                                             </div><br>
+
+
 
 
 

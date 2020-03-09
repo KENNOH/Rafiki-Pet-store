@@ -21,8 +21,7 @@
                     <p><b> Contact Email: {{pet.contact_email}}</b></p>
                     <p><b>Contact Phone: {{pet.contact_phone}}</b></p>
                     <p><b> Location: {{pet.location}}</b></p>
-                    <p><b> Quantity: {{pet.quantity}}</b></p>
-                    <p><b> Cost per pet: {{pet.cost}}</b></p>
+                    <p><b> Price: {{pet.cost}}</b></p>
                     <p><b> Location: {{pet.location}}</b></p>
                     <p><b>Description: {{pet.description}}</b></p>
                     <p><b> Posted on: {{pet.created_at}}</b></p>
@@ -36,24 +35,51 @@
                                 <a href="{% url 'make_review' urlhash=pet.urlhash %}">
                                     <li data-filter="*" class="filter-active">Leave Review</li>
                                 </a>
-                                <a href="{% url 'make_review' urlhash=pet.urlhash %}">
-                                    <li data-filter="*" class="filter-active">See reviews</li>
-                                </a>
+
                                 <a href="/pets_display/">
                                     <li data-filter="*" class="filter-active">Go Back</li>
                                 </a>
                             </ul>
                         </div>
+
                     </div>
 
                 </section>
+
+
             </div>
 
             <div class="col background order-lg-2 order-1 wow fadeInUp">
                 {% for i in image %}
                 <img src="{{i.attachment.url}}" class="img-fluid" alt=""> {% endfor %}
             </div>
+
         </div>
     </div>
 </section>
-{% endblock %}
+{% for r in reviews %}
+<section id="testimonials" class="section-bg">
+    <div class="container">
+
+        <header class="section-header">
+            <h3>Reviews</h3>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="owl-carousel testimonials-carousel wow fadeInUp">
+                    <div class="testimonial-item">
+                        <h3>{{r.customer}}</h3>
+                        <h4>Customer</h4>
+                        <p>{{r.comment}}</p>
+                        <p>Star Rating:{{r.rating}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</section>
+{% endfor %} {% endblock %}
